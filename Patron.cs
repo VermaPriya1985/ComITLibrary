@@ -13,8 +13,6 @@ namespace ComITLibrary
             LastName = lastname;
    
         }
-
-
         // Data Members
         public long Id { get; }
         public string FirstName { get; private set; }

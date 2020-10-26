@@ -7,16 +7,6 @@ namespace ComITLibrary
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            /* LibraryPatron lib = new LibraryPatron(1);
-            Console.WriteLine(lib.BooksCheckedOut);
-            Console.WriteLine(lib.PatronId); */ 
-
-            // lib.BooksCheckedOut = -99;
-            // lib.FinesOwing = -0;
-            
-            // LibraryPatron lib = new LibraryPatron();
-            // LibraryPatron lib = new LibraryPatron(1);
-            // lib.PatronId=1;
 
             LibrarySystem theLibrary = new LibrarySystem();
             Console.WriteLine("Welcome to the ComIT Library!");
@@ -45,11 +35,28 @@ namespace ComITLibrary
                         Console.WriteLine("Something went wrong. Could not check out book");
                     }
                 }
+                // Return Book
                 if(userInput=="r")
                 {
+                    Console.WriteLine("Enter PatronID");
+                    string patronIdInput = Console.ReadLine();
+                    long patronId = Convert.ToInt64(patronIdInput);
 
-                    theLibrary.ReturnBook();
+                    Console.WriteLine("Enter BookID");
+                    string bookIdInput = Console.ReadLine();
+                    long bookId = Convert.ToInt64(bookIdInput);
+                    
+                    bool success = theLibrary.ReturnBook(patronId,bookId);
+                    if(success) 
+                    {
+                        Console.WriteLine("Book has been returned");
+                    } 
+                    else 
+                    {
+                        Console.WriteLine("Something went wrong. Could not check out book");
+                    }
                 }
+                // Search Book
                 if(userInput=="s")
                 {
                     Console.WriteLine("What is the title you want to search for?");
@@ -64,12 +71,22 @@ namespace ComITLibrary
                         Console.WriteLine($"Found a book with Id: {result.Id} ");
                     }
 
-                }
+                } 
                 // Quit
                 if(userInput=="q")
                 {
                     break;
                 }
+            /* LibraryPatron lib = new LibraryPatron(1);
+            Console.WriteLine(lib.BooksCheckedOut);
+            Console.WriteLine(lib.PatronId); */ 
+
+            // lib.BooksCheckedOut = -99;
+            // lib.FinesOwing = -0;
+            
+            // LibraryPatron lib = new LibraryPatron();
+            // LibraryPatron lib = new LibraryPatron(1);
+            // lib.PatronId=1;
 
             }
         }

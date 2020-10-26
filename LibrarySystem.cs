@@ -114,25 +114,64 @@ namespace ComITLibrary
         }
         return result;
     }
-    
-      // Return a book
-        public void ReturnBook() 
+
+    // Return
+    public bool ReturnBook(long patronid, long bookid)
+    {
+
+        Console.WriteLine("Return Book...");
+        bool patronExist = false;
+        bool bookExist = false;
+        bool result = false;
+
+        // Validate patronid
+        for(int i=0;i<_patron.Count;i++)
         {
-            Console.WriteLine("Returning a book...");
+            var nextpatron = _patron[i];
+            if(nextpatron.Id==patronid)
+            {
+                patronExist = true; 
+            }
         }
 
-        /* public void SearchForBook()
+        // handle if patronid does not exists
+        if(!patronExist)
         {
-            Conslole.WriteLine("Searching for Book...");
+            throw new Exception($"patronid does not exists {patronid}");
         }
-        public void CheckoutBook()
+
+        // validate bookid
+        for(int i=0;i<_book.Count;i++)
         {
-            Conslole.WriteLine("Checkout Book...");
-        }
-        public void ReturnBook()
+            var nextbook = _book[i];
+            if(nextbook.Id == bookid)
+            {
+                bookExist = true; 
+                result = true;
+                nextbook.Ischeckedout = false;
+                /* if(nextbook.Ischeckedout)
+                {
+                    result = false;
+                }
+                else
+                {
+                    
+                    result = true;
+                    nextbook.Ischeckedout = true;
+                }*/
+
+            }
+        } 
+
+        if (!bookExist) 
         {
-            Conslole.WriteLine("Return Book...");
+                throw new Exception($"Book {bookid} does not exist!!");
         }
-        */ 
+        return result;
     }
+    
+    // end    
+    
+}
+
 }
